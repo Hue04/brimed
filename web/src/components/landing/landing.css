@@ -4,8 +4,7 @@
    Bảng màu thương hiệu BriMed (xanh – hồng) trên nền giấy ấm.
    Toàn bộ scope dưới .lp2 để không ảnh hưởng các trang khác.
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap&subset=vietnamese');
-
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 .lp2 {
   --paper: #fbf8f3;
   --paper-2: #f5efe5;
@@ -210,7 +209,7 @@
 .lp2 .live-dot { position: relative; width: 8px; height: 8px; flex: none; border-radius: 50%; background: #22a35a; }
 .lp2 .live-dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid #22a35a; animation: lp2-ring 2s var(--ease) infinite; }
 
-.lp2 .hero-title { margin: 28px 0 0; font-size: clamp(38px, 4.15vw, 62px); line-height: 1.1; color: var(--ink); }
+.lp2 .hero-title { margin: 28px 0 0; font-size: clamp(38px, 4.15vw, 62px); line-height: 1.2; color: var(--ink); }
 .lp2 .hero-title .line { display: block; }
 .lp2 .hero-title .line.accent { position: relative; width: fit-content; font-style: italic; color: var(--blue); }
 .lp2 .hero-title .line.accent::after { content: ''; position: absolute; left: 2%; right: 4%; bottom: -.06em; height: .28em; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'><path d='M3 16 C 80 6, 160 4, 230 10 S 340 20, 397 8' fill='none' stroke='%23f980b5' stroke-width='5' stroke-linecap='round'/></svg>") no-repeat center / 100% 100%; clip-path: inset(0 100% 0 0); transition: clip-path 1.2s 1.9s var(--ease-io); }

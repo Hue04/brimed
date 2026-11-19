@@ -5,10 +5,9 @@
 @tailwind utilities;
 
 :root {
-  --brimed-blue: #0d71e2;
+  --brimed-blue: #A7C7F9;
   --brimed-pink: #e8408a;
 }
-
 html {
   -webkit-text-size-adjust: 100%;
 }
