@@ -146,7 +146,38 @@ export default function AdminDashboard() {
   if (!kpi) return <PageLoading />
   const abOver = kpi.antibiotic_rate > kpi.antibiotic_threshold
   const waitOk = kpi.avg_wait_minutes <= kpi.wait_target
+const consultationTrend = Array.from({ length: 7 }, (_, index) => {
+  const date = new Date()
+  date.setHours(0, 0, 0, 0)
+  date.setDate(date.getDate() - (6 - index))
+  const nextDate = new Date(date)
+  nextDate.setDate(nextDate.getDate() + 1)
 
+  return {
+    label: date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }),
+    count: consults.filter((c: any) => {
+      const created = new Date(c.created_at).getTime()
+      return Number.isFinite(created) && created >= date.getTime() && created < nextDate.getTime()
+    }).length,
+  }
+})
+
+const maxTrend = Math.max(1, ...consultationTrend.map(d => d.count))
+
+const statusCounts = [
+  { label: 'Chờ xử lý', value: consults.filter((c: any) => c.status === 'pending').length, color: 'bg-amber-400' },
+  { label: 'Đang tư vấn', value: consults.filter((c: any) => c.status === 'in_call').length, color: 'bg-sky-500' },
+  { label: 'Hoàn tất', value: consults.filter((c: any) => c.status === 'approved').length, color: 'bg-emerald-500' },
+  { label: 'Từ chối', value: consults.filter((c: any) => c.status === 'rejected').length, color: 'bg-rose-500' },
+  { label: 'Đã huỷ', value: consults.filter((c: any) => c.status === 'cancelled').length, color: 'bg-slate-400' },
+]
+
+const revenueBars = [
+  { label: 'Thuê bao B2B', value: Number(kpi.revenue_b2b_vnd) || 0, color: 'bg-sky-500' },
+  { label: 'Phí khám', value: Number(kpi.revenue_consultation_vnd) || 0, color: 'bg-pink-500' },
+]
+
+const maxRevenue = Math.max(1, ...revenueBars.map(d => d.value))
   return (
     <div className="space-y-4 max-w-4xl">
       <SeoMeta title="Quản trị hệ thống – BriMed" />
@@ -235,6 +266,63 @@ export default function AdminDashboard() {
               Tổng toa phát hành: <strong className="text-bluedark">{kpi.prescriptions_total}</strong>
             </div>
           </section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <section className="card p-4">
+    <h2 className="section-title mb-4">Số phiên tư vấn trong 7 ngày</h2>
+    <div className="flex items-end justify-between gap-2 h-44">
+      {consultationTrend.map((d, i) => (
+        <div key={i} className="flex-1 h-full flex flex-col items-center justify-end gap-2">
+          <span className="text-xs font-bold">{d.count}</span>
+          <div
+            className="w-full max-w-10 rounded-t-md bg-primary"
+            style={{ height: `${Math.max(4, d.count / maxTrend * 100)}%` }}
+          />
+          <span className="text-[10px] text-slate-500">{d.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section className="card p-4">
+    <h2 className="section-title mb-4">Phân bố trạng thái tư vấn</h2>
+    <div className="space-y-4">
+      {statusCounts.map(s => (
+        <div key={s.label}>
+          <div className="flex justify-between text-sm mb-1">
+            <span>{s.label}</span>
+            <strong>{s.value}</strong>
+          </div>
+          <div className="h-3 rounded-full bg-slate-100 overflow-hidden">
+            <div
+              className={`h-full rounded-full ${s.color}`}
+              style={{ width: `${s.value / Math.max(1, consults.length) * 100}%` }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section className="card p-4 lg:col-span-2">
+    <h2 className="section-title mb-4">So sánh doanh thu</h2>
+    <div className="space-y-5">
+      {revenueBars.map(r => (
+        <div key={r.label}>
+          <div className="flex justify-between gap-3 text-sm mb-2">
+            <span>{r.label}</span>
+            <strong>{fmtVnd(r.value)}</strong>
+          </div>
+          <div className="h-4 rounded-full bg-slate-100 overflow-hidden">
+            <div
+              className={`h-full rounded-full ${r.color}`}
+              style={{ width: `${r.value / maxRevenue * 100}%` }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</div>
         </>
       )}
 
@@ -551,3 +639,5 @@ function Mini({ label, value }: { label: string; value: number }) {
     </div>
   )
 }
+
+
