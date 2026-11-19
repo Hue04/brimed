@@ -267,18 +267,22 @@ export function ensureDb(): Promise<void> {
         await seedDb()
         return
       }
-
+      
       // Tài khoản quản trị viên duy nhất của Giai đoạn 1
-      const admin = await pool.query(`SELECT COUNT(*)::int AS c FROM users WHERE role = 'admin'`)
+      const admin = await pool.query(
+        `SELECT COUNT(*)::int AS c FROM users WHERE role = 'admin'`
+      )
+
       if (admin.rows[0].c === 0) {
         await pool.query(
-          `INSERT INTO users (full_name, phone, password_hash, role, token_balance, free_prescriptions, created_at)
-           VALUES ($1, $2, $3, 'admin', 0, 0, $4)`,
+          `INSERT INTO users
+            (full_name, phone, password_hash, role, created_at)
+           VALUES ($1, $2, $3, 'admin', $4)`,
           ['Quản trị viên BriMed', '0900000001', sha256('admin@2026'), nowIso()]
         )
       }
 
-      // Khách hàng quan tâm mẫu (form đăng ký trên trang chủ)
+ // Khách hàng quan tâm mẫu (form đăng ký trên trang chủ)
       const leads = await pool.query(`SELECT COUNT(*)::int AS c FROM patient_leads`)
       if (leads.rows[0].c === 0) {
         await pool.query(
