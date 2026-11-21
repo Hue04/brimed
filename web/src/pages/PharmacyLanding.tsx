@@ -108,8 +108,7 @@ function Hero({ ready }: { ready: boolean }) {
         </p>
         <h1 className="hero-title">
           <span className="line"><SplitWords text="Quầy nhỏ của bạn," start={250} /></span>
-          <span className="line accent"><SplitWords text="cánh cửa đến bác sĩ." start={560} /></span>
-        </h1>
+<span className="line accent"><SplitWords text={"cánh cửa đến bác\u00A0sĩ."} start={560} /></span>        </h1>
         <p className="hero-lede">
           Một chiếc standee, một mã QR — và quầy thuốc của bạn trở thành nơi bệnh nhân được bác sĩ thật
           kê toa điện tử trong vài phút. Không cần app, không cần thêm nhân sự.
