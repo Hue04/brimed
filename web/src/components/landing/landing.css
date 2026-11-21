@@ -1142,3 +1142,9 @@
     padding: 14px;
   }
 }
+
+.final-inner h2 em {
+  white-space: nowrap;
+  display: inline-block;
+  font-size: clamp(26px, 4.2vw, 64px);
+}
