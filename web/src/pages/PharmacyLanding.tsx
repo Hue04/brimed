@@ -301,46 +301,148 @@ function Quote() {
     </section>
   )
 }
-
 function Fee() {
+  const pharmacyPlans = [
+    {
+      name: "HÀNG THÁNG",
+      desc: "Linh hoạt, trả từng tháng",
+      price: "900.000",
+      unit: "đ/tháng",
+      note: "Thanh toán mỗi tháng",
+      features: [
+        "Điểm tư vấn bác sĩ trực tuyến",
+        "Bảng QR mica tại quầy",
+        "Huy hiệu nhà thuốc đối tác",
+        "Hướng dẫn sử dụng online",
+      ],
+      footer: "Không ràng buộc thời hạn",
+    },
+    {
+      name: "GÓI 3 THÁNG",
+      desc: "Trả trước 2.550.000 đ",
+      price: "850.000",
+      unit: "đ/tháng",
+      note: "Giảm 50.000 đ mỗi tháng",
+      saving: "Tiết kiệm 150.000 đ",
+      features: [
+        "Toàn bộ quyền lợi gói Hằng tháng",
+        "Standee và tờ rơi tại quầy",
+        "Tập huấn trực tiếp tại nhà thuốc",
+        "Hiện trên bản đồ nhà thuốc BriMed",
+      ],
+      footer: "Thanh toán một lần cho 3 tháng",
+    },
+    {
+      name: "GÓI 6 THÁNG",
+      desc: "Trả trước 4.500.000 đ",
+      price: "750.000",
+      unit: "đ/tháng",
+      note: "Giảm 150.000 đ mỗi tháng",
+      saving: "Tiết kiệm 900.000 đ",
+      popular: true,
+      features: [
+        "Toàn bộ quyền lợi gói 3 tháng",
+        "Chăm sóc nhà thuốc hàng tháng",
+        "Báo cáo lượt khám hàng tháng",
+        "Giữ giá đến hết gói",
+      ],
+      footer: "Thanh toán một lần cho 6 tháng",
+    },
+    {
+      name: "GÓI 1 NĂM",
+      desc: "Trả trước 7.800.000 đ",
+      price: "650.000",
+      unit: "đ/tháng",
+      note: "Giá tốt nhất",
+      saving: "Tiết kiệm 3.000.000 đ",
+      best: true,
+      features: [
+        "Toàn bộ quyền lợi gói 6 tháng",
+        "Ưu tiên hỗ trợ trong 2 giờ",
+        "Ấn phẩm in logo nhà thuốc",
+        "Quảng bá trên fanpage BriMed",
+      ],
+      footer: "Thanh toán một lần cho 12 tháng",
+    },
+  ];
+
   return (
-    <section className="sec pricing" id="phi">
-      <SectionHead kicker="Chi phí minh bạch" title={<>Một mức phí cố định,<br /><em>không đếm từng toa.</em></>} text="Bạn luôn biết trước mình trả bao nhiêu mỗi tháng — và toàn bộ tiền thuốc vẫn thuộc về quầy của bạn." />
-      <div className="price-layout">
-        <article className="price-main" data-reveal>
-          <span className="price-label">Tháng đầu tiên</span>
-          <div className="price-num"><b>0</b><span>đ</span></div>
-          <div className="price-split" aria-label="Phí thuê bao theo giai đoạn">
-            <div style={v({ '--w': '45%' })}><i /><span>6 tháng đầu 500.000đ/tháng</span></div>
-            <div style={v({ '--w': '55%' })} className="pink"><i /><span>Ổn định 900.000đ/tháng</span></div>
-          </div>
-          <ul>
-            <li><Check size={16} /> Standee QR + tài khoản quản lý miễn phí</li>
-            <li><Check size={16} /> Không phí theo từng đơn, không phí ẩn</li>
-            <li><Check size={16} /> BriMed không thu hoa hồng tiền thuốc</li>
-          </ul>
-          <div className="price-qr">
-            <div className="qr-box"><span className="standee-mini"><QrCode size={56} strokeWidth={1} /></span><i className="scanline" /></div>
-            <p><b>Đăng ký hôm nay.</b><br />BriMed liên hệ trong 24 giờ, lắp standee trong 48 giờ tại Gò Vấp.</p>
-          </div>
-        </article>
-        <div className="safety-col">
-          <article className="safe good" data-reveal style={v({ '--d': '120ms' })}>
-            <h3><span><Check size={18} /></span> Phù hợp tham gia</h3>
-            <p>Nhà thuốc có giấy phép kinh doanh dược, có dược sĩ phụ trách chuyên môn, muốn thêm luồng khách mới mà không đổi cách vận hành.</p>
-            <div className="tags">
-              {['Quầy thuốc tây', 'Có DS phụ trách', 'Khu vực Gò Vấp', 'Mở quầy mỗi ngày'].map((t) => <span key={t}>{t}</span>)}
+    <section className="sec pricing brimed-pricing" id="phi">
+      <div className="bp-heading">
+        <span className="bp-brand">
+          <span className="bp-logo">✚</span> BRIMED
+        </span>
+        <span className="bp-label">● Bảng giá minh bạch</span>
+      </div>
+
+      <div className="bp-intro">
+        <h2>
+          Gói dành cho <span>nhà thuốc đối tác.</span>
+        </h2>
+        <p>
+          Chọn thời hạn phù hợp — gắn bó càng lâu, chi phí mỗi tháng càng tốt.
+        </p>
+      </div>
+
+      <div className="bp-subheading">
+        <h3>Bảng giá dành cho nhà thuốc</h3>
+        <p>Chọn gói phù hợp với hoạt động kinh doanh của bạn.</p>
+      </div>
+
+      <div className="bp-pharmacy-grid">
+        {pharmacyPlans.map((plan) => (
+          <article
+            className={`bp-card ${plan.popular ? "bp-featured" : ""}`}
+            key={plan.name}
+          >
+            {plan.popular && <span className="bp-ribbon">Phổ biến</span>}
+            {plan.best && (
+              <span className="bp-ribbon bp-pink">Tiết kiệm nhất</span>
+            )}
+
+            <h4>{plan.name}</h4>
+            <p className="bp-desc">{plan.desc}</p>
+
+            <div className="bp-price">
+              <strong>{plan.price}</strong>
+              <span>{plan.unit}</span>
             </div>
+
+            <p className="bp-note">{plan.note}</p>
+            {plan.saving && (
+              <span className="bp-saving">{plan.saving}</span>
+            )}
+
+            <ul className="bp-bullets">
+              <li>Khách quét QR, không cần tải app</li>
+              <li>Bác sĩ kê toa, khách mua tại quầy</li>
+            </ul>
+
+            <div className="bp-divider" />
+            <h5>Quyền lợi gói</h5>
+
+            <ul className="bp-features">
+              {plan.features.map((feature) => (
+                <li key={feature}>
+                  <span>✓</span> {feature}
+                </li>
+              ))}
+            </ul>
+
+            <p className="bp-card-footer">{plan.footer}</p>
           </article>
-          <article className="safe alert" data-reveal style={v({ '--d': '220ms' })}>
-            <h3><span>!</span> BriMed không dành cho</h3>
-            <p>Nhà thuốc muốn "bán toa" không có bác sĩ khám, hoặc kinh doanh thuốc kiểm soát đặc biệt ngoài quy định — mọi toa đều phải có mã ký số hợp lệ mới được cấp.</p>
-            <a className="sos" href="tel:19002026"><Phone size={16} /> Hotline <b>1900 2026</b></a>
-          </article>
-        </div>
+        ))}
+      </div>
+
+      <div className="bp-promo">
+        <span className="bp-percent">%</span>
+        <p>
+          <strong>Miễn phí phần mềm tháng đầu tiên</strong> cho mọi nhà thuốc
+          mới — trải nghiệm đầy đủ trước khi chọn gói.
+        </p>
       </div>
     </section>
-  )
+  );
 }
 
 function Faq() {

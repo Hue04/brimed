@@ -355,7 +355,13 @@ function Fee() {
           <article className="safe good" data-reveal style={v({ '--d': '120ms' })}>
             <h3><span><Check size={18} /></span> Được phép khám từ xa</h3>
             <p>Khám theo danh mục TT 30/2023/TT-BYT — triệu chứng nhẹ, mới xuất hiện, bệnh nhân ổn định.</p>
-            <div className="tags">{CONDITIONS.slice(0, 7).map((t) => <span key={t}>{t}</span>)}</div>
+
+<div className="tags" style={{display: "flex",flexWrap: "wrap",gap: "8px 12px", lineHeight: 1.8, }}
+>
+  {CONDITIONS.slice(0, 7).map((t) => (
+    <span key={t}>{t}</span>
+  ))}
+</div>
           </article>
           <article className="safe alert" data-reveal style={v({ '--d': '220ms' })}>
             <h3><span><Ban size={18} /></span> Từ chối khi không an toàn</h3>
